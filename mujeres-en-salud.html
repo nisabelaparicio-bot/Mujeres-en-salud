@@ -1,0 +1,897 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mujeres en Salud — Revista Digital</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=DM+Sans:wght@300;400;500&family=Dancing+Script:wght@600&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+--magenta:#D7265E;
+--magenta-light:#F4C0D1;
+--magenta-pale:#FBE8EF;
+--beige:#F5EEE8;
+--beige-dark:#EDE3D9;
+--cream:#FDF9F6;
+--dark:#1A1A1A;
+--gray:#6B6B6B;
+--gray-light:#E8E3DE;
+}
+html{scroll-behavior:smooth}
+body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--dark);overflow-x:hidden}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(253,249,246,0.95);backdrop-filter:blur(12px);border-bottom:1px solid var(--gray-light);padding:0 2rem}
+.nav-inner{max-width:1200px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;height:64px}
+.nav-logo{font-family:'Playfair Display',serif;font-size:1.4rem;font-weight:900;color:var(--magenta);text-decoration:none;letter-spacing:-0.5px}
+.nav-logo span{font-family:'Dancing Script',cursive;font-size:1rem;color:var(--gray);display:block;line-height:0.8;margin-top:2px}
+.nav-links{display:flex;gap:2rem;list-style:none}
+.nav-links a{text-decoration:none;color:var(--gray);font-size:0.85rem;font-weight:500;letter-spacing:0.5px;text-transform:uppercase;transition:color 0.2s}
+.nav-links a:hover{color:var(--magenta)}
+.nav-cta{background:var(--magenta);color:white;padding:0.5rem 1.25rem;border-radius:50px;font-size:0.8rem;font-weight:500;text-decoration:none;letter-spacing:0.5px;transition:opacity 0.2s}
+.nav-cta:hover{opacity:0.85}
+.hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;background:none;border:none;padding:4px}
+.hamburger span{display:block;width:22px;height:2px;background:var(--dark);transition:all 0.3s}
+
+/* HERO */
+.hero{min-height:100vh;display:flex;align-items:center;background:var(--beige);position:relative;overflow:hidden;padding-top:64px}
+.hero-bg-text{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-family:'Playfair Display',serif;font-size:28vw;font-weight:900;color:rgba(215,38,94,0.04);white-space:nowrap;pointer-events:none;letter-spacing:-2px}
+.hero-inner{max-width:1200px;margin:0 auto;padding:4rem 2rem;display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:center;position:relative;z-index:1}
+.hero-label{display:inline-block;background:var(--magenta-pale);color:var(--magenta);font-size:0.75rem;font-weight:500;letter-spacing:2px;text-transform:uppercase;padding:0.4rem 1rem;border-radius:50px;margin-bottom:1.5rem}
+.hero-title{font-family:'Playfair Display',serif;font-size:4.5rem;font-weight:900;line-height:1.05;color:var(--dark);margin-bottom:1rem;letter-spacing:-2px}
+.hero-title em{font-style:italic;color:var(--magenta)}
+.hero-subtitle{font-size:1.1rem;color:var(--gray);line-height:1.7;margin-bottom:2rem;max-width:420px}
+.hero-btns{display:flex;gap:1rem;flex-wrap:wrap}
+.btn-primary{background:var(--magenta);color:white;padding:0.85rem 2rem;border-radius:50px;text-decoration:none;font-weight:500;font-size:0.9rem;transition:all 0.2s;display:inline-flex;align-items:center;gap:0.5rem}
+.btn-primary:hover{background:#b81e4e;transform:translateY(-1px)}
+.btn-secondary{background:transparent;color:var(--dark);padding:0.85rem 2rem;border-radius:50px;text-decoration:none;font-weight:500;font-size:0.9rem;border:1.5px solid var(--dark);transition:all 0.2s}
+.btn-secondary:hover{background:var(--dark);color:white}
+.hero-image{position:relative}
+.hero-img-frame{background:var(--magenta-pale);border-radius:2rem;overflow:hidden;aspect-ratio:4/5;display:flex;align-items:center;justify-content:center;position:relative}
+.hero-img-placeholder{width:100%;height:100%;background:linear-gradient(135deg,#F4C0D1 0%,#D7265E 100%);display:flex;flex-direction:column;align-items:center;justify-content:center;color:white;text-align:center;padding:2rem}
+.hero-img-placeholder .big-num{font-family:'Playfair Display',serif;font-size:8rem;font-weight:900;opacity:0.3;line-height:1}
+.hero-img-placeholder p{font-size:1.1rem;font-weight:500;opacity:0.9}
+.hero-badge{position:absolute;bottom:-1rem;left:-1rem;background:white;border-radius:1rem;padding:1rem 1.25rem;box-shadow:0 8px 32px rgba(0,0,0,0.1)}
+.hero-badge .num{font-family:'Playfair Display',serif;font-size:2rem;font-weight:900;color:var(--magenta);line-height:1}
+.hero-badge .txt{font-size:0.75rem;color:var(--gray)}
+.hero-stats{display:flex;gap:2rem;margin-top:2rem;padding-top:2rem;border-top:1px solid var(--gray-light)}
+.stat .num{font-family:'Playfair Display',serif;font-size:1.8rem;font-weight:900;color:var(--magenta)}
+.stat .lbl{font-size:0.75rem;color:var(--gray);text-transform:uppercase;letter-spacing:1px}
+
+/* SECTION GENERIC */
+section{padding:5rem 2rem}
+.section-inner{max-width:1200px;margin:0 auto}
+.section-label{font-size:0.75rem;font-weight:500;letter-spacing:3px;text-transform:uppercase;color:var(--magenta);margin-bottom:0.75rem}
+.section-title{font-family:'Playfair Display',serif;font-size:2.8rem;font-weight:900;line-height:1.1;color:var(--dark);margin-bottom:1rem;letter-spacing:-1px}
+.section-subtitle{font-size:1rem;color:var(--gray);line-height:1.7;max-width:560px}
+
+/* SECCIONES POR EDAD */
+.ages{background:var(--dark)}
+.ages .section-title{color:white}
+.ages .section-subtitle{color:rgba(255,255,255,0.5)}
+.ages-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;margin-top:3rem}
+.age-card{border-radius:1.5rem;padding:2.5rem 2rem;cursor:pointer;transition:transform 0.3s;text-decoration:none;display:block;position:relative;overflow:hidden}
+.age-card:hover{transform:translateY(-4px)}
+.age-card.adolescentes{background:#2a1520;border:1px solid #3d1f2c}
+.age-card.adultas{background:#1a1a2e;border:1px solid #252540}
+.age-card.mayores{background:#1a2a20;border:1px solid #1f3d2c}
+.age-card-label{font-size:0.7rem;letter-spacing:3px;text-transform:uppercase;margin-bottom:1rem;font-weight:500}
+.age-card.adolescentes .age-card-label{color:#F4C0D1}
+.age-card.adultas .age-card-label{color:#9FB4F4}
+.age-card.mayores .age-card-label{color:#9FE1CB}
+.age-card-title{font-family:'Playfair Display',serif;font-size:1.8rem;font-weight:900;color:white;line-height:1.2;margin-bottom:0.75rem}
+.age-card-range{font-size:0.85rem;color:rgba(255,255,255,0.4);margin-bottom:1.5rem}
+.age-card-count{font-size:0.8rem;color:rgba(255,255,255,0.6)}
+.age-card-count strong{color:white}
+.age-card-arrow{position:absolute;bottom:2rem;right:2rem;width:40px;height:40px;border-radius:50%;background:rgba(255,255,255,0.08);display:flex;align-items:center;justify-content:center;color:white;font-size:1.2rem}
+
+/* ARTÍCULOS DESTACADOS */
+.articles-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;margin-top:3rem}
+.article-card{background:white;border-radius:1.25rem;overflow:hidden;cursor:pointer;transition:transform 0.3s,box-shadow 0.3s;border:1px solid var(--gray-light)}
+.article-card:hover{transform:translateY(-4px);box-shadow:0 20px 40px rgba(0,0,0,0.08)}
+.article-card-img{height:200px;display:flex;align-items:center;justify-content:center;font-family:'Playfair Display',serif;font-size:5rem;font-weight:900;color:white;position:relative;overflow:hidden}
+.article-card-img.pink{background:linear-gradient(135deg,#F4C0D1,#D7265E)}
+.article-card-img.blue{background:linear-gradient(135deg,#B5D4F4,#378ADD)}
+.article-card-img.green{background:linear-gradient(135deg,#C0DD97,#639922)}
+.article-card-img.purple{background:linear-gradient(135deg,#CECBF6,#534AB7)}
+.article-card-img.coral{background:linear-gradient(135deg,#F5C4B3,#D85A30)}
+.article-card-img.teal{background:linear-gradient(135deg,#9FE1CB,#0F6E56)}
+.article-card-body{padding:1.5rem}
+.article-tag{display:inline-block;background:var(--magenta-pale);color:var(--magenta);font-size:0.7rem;font-weight:500;letter-spacing:1px;text-transform:uppercase;padding:0.3rem 0.75rem;border-radius:50px;margin-bottom:0.75rem}
+.article-card-title{font-family:'Playfair Display',serif;font-size:1.15rem;font-weight:700;line-height:1.35;color:var(--dark);margin-bottom:0.5rem}
+.article-card-desc{font-size:0.85rem;color:var(--gray);line-height:1.6;margin-bottom:1rem}
+.article-meta{display:flex;align-items:center;justify-content:space-between;font-size:0.75rem;color:var(--gray)}
+.read-time{display:flex;align-items:center;gap:0.3rem}
+
+/* QUIZ */
+.quiz-section{background:var(--magenta-pale)}
+.quiz-card{background:white;border-radius:2rem;padding:3rem;max-width:700px;margin:3rem auto 0}
+.quiz-question{font-family:'Playfair Display',serif;font-size:1.5rem;font-weight:700;color:var(--dark);margin-bottom:2rem;line-height:1.4}
+.quiz-options{display:grid;gap:1rem;margin-bottom:2rem}
+.quiz-option{background:var(--beige);border:2px solid transparent;border-radius:1rem;padding:1rem 1.5rem;cursor:pointer;font-size:0.95rem;color:var(--dark);transition:all 0.2s;text-align:left;font-family:'DM Sans',sans-serif}
+.quiz-option:hover{border-color:var(--magenta);background:var(--magenta-pale)}
+.quiz-option.selected{border-color:var(--magenta);background:var(--magenta-pale);color:var(--magenta);font-weight:500}
+.quiz-option.correct{border-color:#639922;background:#EAF3DE;color:#3B6D11}
+.quiz-option.wrong{border-color:#D85A30;background:#FAECE7;color:#993C1D}
+.quiz-progress{display:flex;gap:0.5rem;margin-bottom:2rem}
+.quiz-dot{width:8px;height:8px;border-radius:50%;background:var(--gray-light);transition:background 0.3s}
+.quiz-dot.active{background:var(--magenta)}
+.quiz-feedback{padding:1rem 1.5rem;border-radius:1rem;margin-bottom:1.5rem;font-size:0.9rem;line-height:1.6;display:none}
+.quiz-feedback.show{display:block}
+.quiz-feedback.correct-fb{background:#EAF3DE;color:#3B6D11;border-left:3px solid #639922}
+.quiz-feedback.wrong-fb{background:#FAECE7;color:#993C1D;border-left:3px solid #D85A30}
+.quiz-nav{display:flex;gap:1rem;align-items:center}
+.quiz-score{background:var(--magenta-pale);border-radius:1rem;padding:1.5rem;text-align:center;display:none}
+.quiz-score.show{display:block}
+.quiz-score .big{font-family:'Playfair Display',serif;font-size:4rem;font-weight:900;color:var(--magenta)}
+
+/* ARTÍCULO COMPLETO */
+.article-view{display:none;position:fixed;top:0;left:0;right:0;bottom:0;z-index:200;background:var(--cream);overflow-y:auto}
+.article-view.open{display:block}
+.article-close{position:fixed;top:1.5rem;right:2rem;z-index:201;background:white;border:1.5px solid var(--gray-light);border-radius:50%;width:44px;height:44px;cursor:pointer;font-size:1.2rem;display:flex;align-items:center;justify-content:center;transition:all 0.2s;color:var(--dark)}
+.article-close:hover{background:var(--magenta);color:white;border-color:var(--magenta)}
+.article-hero{height:50vh;min-height:360px;display:flex;align-items:flex-end;padding:3rem;position:relative;overflow:hidden}
+.article-hero-bg{position:absolute;inset:0}
+.article-hero-content{position:relative;z-index:1;max-width:800px}
+.article-section-tag{display:inline-block;background:rgba(255,255,255,0.2);backdrop-filter:blur(8px);color:white;font-size:0.7rem;font-weight:500;letter-spacing:2px;text-transform:uppercase;padding:0.4rem 1rem;border-radius:50px;margin-bottom:1rem;border:1px solid rgba(255,255,255,0.3)}
+.article-hero-title{font-family:'Playfair Display',serif;font-size:3.5rem;font-weight:900;color:white;line-height:1.1;margin-bottom:0.75rem;letter-spacing:-1px}
+.article-hero-sub{font-size:1.1rem;color:rgba(255,255,255,0.8);font-style:italic}
+.article-content{max-width:760px;margin:0 auto;padding:3rem 2rem 5rem}
+.article-meta-bar{display:flex;align-items:center;gap:1.5rem;padding:1.5rem 0;border-bottom:1px solid var(--gray-light);margin-bottom:2.5rem;font-size:0.85rem;color:var(--gray);flex-wrap:wrap}
+.article-body h2{font-family:'Playfair Display',serif;font-size:1.8rem;font-weight:700;color:var(--dark);margin:2.5rem 0 1rem;letter-spacing:-0.5px}
+.article-body h3{font-size:1.1rem;font-weight:500;color:var(--magenta);margin:2rem 0 0.75rem;letter-spacing:0.5px;text-transform:uppercase;font-size:0.85rem}
+.article-body p{font-size:1rem;line-height:1.85;color:#333;margin-bottom:1.25rem}
+.article-body .highlight-box{background:var(--magenta-pale);border-left:3px solid var(--magenta);border-radius:0 0.75rem 0.75rem 0;padding:1.25rem 1.5rem;margin:2rem 0}
+.article-body .highlight-box p{color:var(--magenta);font-weight:500;margin:0;font-style:italic}
+.article-body .sabias-que{background:var(--beige);border-radius:1rem;padding:1.5rem 2rem;margin:2rem 0}
+.article-body .sabias-que strong{display:block;font-size:0.75rem;letter-spacing:2px;text-transform:uppercase;color:var(--magenta);margin-bottom:0.5rem}
+.article-body ul{padding-left:0;margin-bottom:1.25rem;list-style:none}
+.article-body ul li{padding:0.5rem 0 0.5rem 1.5rem;position:relative;color:#333;font-size:1rem;line-height:1.7;border-bottom:1px solid var(--gray-light)}
+.article-body ul li:before{content:"→";position:absolute;left:0;color:var(--magenta);font-weight:700}
+.article-refs{margin-top:3rem;padding-top:2rem;border-top:1px solid var(--gray-light)}
+.article-refs h4{font-size:0.75rem;letter-spacing:2px;text-transform:uppercase;color:var(--gray);margin-bottom:1rem}
+.article-refs p{font-size:0.8rem;color:var(--gray);line-height:1.7}
+.article-reactions{display:flex;gap:1rem;margin:2rem 0;flex-wrap:wrap}
+.reaction-btn{background:var(--beige);border:1.5px solid var(--gray-light);border-radius:50px;padding:0.5rem 1.25rem;cursor:pointer;font-size:0.9rem;transition:all 0.2s;font-family:'DM Sans',sans-serif;display:flex;align-items:center;gap:0.4rem}
+.reaction-btn:hover,.reaction-btn.active{background:var(--magenta-pale);border-color:var(--magenta);color:var(--magenta)}
+.reaction-count{font-size:0.8rem;font-weight:500}
+
+/* NEWSLETTER */
+.newsletter{background:var(--dark);text-align:center}
+.newsletter .section-title{color:white}
+.newsletter p{color:rgba(255,255,255,0.5);max-width:480px;margin:1rem auto 2rem}
+.newsletter-form{display:flex;gap:1rem;max-width:480px;margin:0 auto;flex-wrap:wrap;justify-content:center}
+.newsletter-form input{flex:1;min-width:240px;padding:0.85rem 1.5rem;border-radius:50px;border:1.5px solid rgba(255,255,255,0.15);background:rgba(255,255,255,0.08);color:white;font-family:'DM Sans',sans-serif;font-size:0.9rem;outline:none}
+.newsletter-form input::placeholder{color:rgba(255,255,255,0.35)}
+.newsletter-form input:focus{border-color:var(--magenta)}
+.newsletter-form button{background:var(--magenta);color:white;padding:0.85rem 1.75rem;border-radius:50px;border:none;cursor:pointer;font-weight:500;font-size:0.9rem;font-family:'DM Sans',sans-serif;transition:opacity 0.2s}
+.newsletter-form button:hover{opacity:0.85}
+
+/* FOOTER */
+footer{background:#111;color:rgba(255,255,255,0.4);padding:3rem 2rem;text-align:center}
+footer .footer-logo{font-family:'Playfair Display',serif;font-size:1.8rem;font-weight:900;color:var(--magenta);margin-bottom:0.5rem}
+footer p{font-size:0.8rem;line-height:1.7}
+
+/* MODAL SECTION */
+.modal-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.5);z-index:300;align-items:center;justify-content:center}
+.modal-overlay.open{display:flex}
+.modal{background:white;border-radius:1.5rem;padding:2.5rem;max-width:480px;width:90%;text-align:center}
+.modal h3{font-family:'Playfair Display',serif;font-size:1.8rem;font-weight:900;color:var(--dark);margin-bottom:0.75rem}
+.modal p{color:var(--gray);line-height:1.7;margin-bottom:1.5rem}
+.modal .big-check{font-size:3rem;margin-bottom:1rem}
+
+/* RESPONSIVE */
+@media(max-width:900px){
+.hero-inner{grid-template-columns:1fr;gap:2rem}
+.hero-image{display:none}
+.hero-title{font-size:3rem}
+.ages-grid{grid-template-columns:1fr}
+.articles-grid{grid-template-columns:1fr 1fr}
+.nav-links{display:none}
+.hamburger{display:flex}
+}
+@media(max-width:600px){
+.articles-grid{grid-template-columns:1fr}
+.hero-title{font-size:2.2rem}
+.section-title{font-size:2rem}
+.article-hero-title{font-size:2.2rem}
+.article-hero{padding:1.5rem}
+}
+
+/* ANIMATIONS */
+@keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+.fade-up{animation:fadeUp 0.6s ease forwards}
+.fade-up-2{animation:fadeUp 0.6s ease 0.15s forwards;opacity:0}
+.fade-up-3{animation:fadeUp 0.6s ease 0.3s forwards;opacity:0}
+
+.sabias-banner{background:var(--magenta);color:white;padding:1rem 2rem;text-align:center;font-size:0.9rem}
+.sabias-banner strong{font-weight:700}
+
+/* TRACKER */
+.tracker-section{background:var(--beige)}
+.tracker-card{background:white;border-radius:1.5rem;padding:2rem;margin-top:2rem}
+.tracker-months{display:flex;gap:0.5rem;flex-wrap:wrap;margin-bottom:1.5rem}
+.tracker-month{width:44px;height:44px;border-radius:50%;border:2px solid var(--gray-light);display:flex;align-items:center;justify-content:center;font-size:0.75rem;font-weight:500;cursor:pointer;transition:all 0.2s;color:var(--gray)}
+.tracker-month:hover{border-color:var(--magenta)}
+.tracker-month.marked{background:var(--magenta);border-color:var(--magenta);color:white}
+.tracker-month.today{border-color:var(--magenta-light)}
+.tracker-tips{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin-top:1.5rem}
+.tracker-tip{background:var(--beige);border-radius:1rem;padding:1rem;text-align:center}
+.tracker-tip .icon{font-size:1.5rem;margin-bottom:0.5rem}
+.tracker-tip h4{font-size:0.8rem;font-weight:500;color:var(--dark);margin-bottom:0.25rem}
+.tracker-tip p{font-size:0.75rem;color:var(--gray)}
+@media(max-width:600px){.tracker-tips{grid-template-columns:1fr}.tracker-months{gap:0.3rem}.tracker-month{width:38px;height:38px;font-size:0.7rem}}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+<div class="nav-inner">
+<a href="#" class="nav-logo" onclick="showHome()">MUJERES<span>en salud</span></a>
+<ul class="nav-links">
+<li><a href="#" onclick="scrollToSection('secciones')">Secciones</a></li>
+<li><a href="#" onclick="scrollToSection('articulos')">Artículos</a></li>
+<li><a href="#" onclick="scrollToSection('quiz')">Quiz</a></li>
+<li><a href="#" onclick="scrollToSection('rastreador')">Mi Salud</a></li>
+</ul>
+<a href="#" class="nav-cta" onclick="scrollToSection('newsletter')">Suscribirse</a>
+<button class="hamburger" onclick="toggleMenu()" aria-label="Menú">
+<span></span><span></span><span></span>
+</button>
+</div>
+</nav>
+
+<!-- BANNER -->
+<div class="sabias-banner">
+<strong>Junio 2026 · Edición especial:</strong> Salud femenina en la era digital · Universidad José Matías Delgado
+</div>
+
+<!-- HERO -->
+<section class="hero" id="home">
+<div class="hero-bg-text">SALUD</div>
+<div class="hero-inner">
+<div class="hero-text fade-up">
+<div class="hero-label">Revista Digital · Junio 2026</div>
+<h1 class="hero-title">Tu salud,<br>tu <em>historia</em></h1>
+<p class="hero-subtitle">Información médica basada en evidencia científica, escrita con empatía para mujeres de todas las edades. Sin tabúes, sin miedo.</p>
+<div class="hero-btns">
+<a href="#" class="btn-primary" onclick="scrollToSection('articulos')">→ Explorar artículos</a>
+<a href="#" class="btn-secondary" onclick="scrollToSection('quiz')">Hacer el quiz</a>
+</div>
+<div class="hero-stats">
+<div class="stat"><div class="num">11</div><div class="lbl">Artículos</div></div>
+<div class="stat"><div class="num">3</div><div class="lbl">Secciones</div></div>
+<div class="stat"><div class="num">100%</div><div class="lbl">Basado en ciencia</div></div>
+</div>
+</div>
+<div class="hero-image fade-up-2">
+<div class="hero-img-frame">
+<div class="hero-img-placeholder">
+<div class="big-num">M</div>
+<p>Mujeres en Salud<br>Junio 2026</p>
+</div>
+</div>
+<div class="hero-badge">
+<div class="num">UJMD</div>
+<div class="txt">Health Magazine 2026</div>
+</div>
+</div>
+</div>
+</section>
+
+<!-- SECCIONES POR EDAD -->
+<section class="ages" id="secciones">
+<div class="section-inner">
+<div class="section-label" style="color:rgba(255,255,255,0.4)">Explora por etapa de vida</div>
+<h2 class="section-title">Cada etapa,<br>su propia voz</h2>
+<p class="section-subtitle">Contenido médico especializado según tu momento de vida.</p>
+<div class="ages-grid">
+<a href="#" class="age-card adolescentes" onclick="filterArticles('adolescentes');scrollToSection('articulos');return false">
+<div class="age-card-label">Sección 01</div>
+<div class="age-card-title">Adoles-<br>centes</div>
+<div class="age-card-range">12 — 18 años</div>
+<div class="age-card-count"><strong>4 artículos</strong> · Pubertad, menstruación, redes sociales, IA</div>
+<div class="age-card-arrow">→</div>
+</a>
+<a href="#" class="age-card adultas" onclick="filterArticles('adultas');scrollToSection('articulos');return false">
+<div class="age-card-label">Sección 02</div>
+<div class="age-card-title">Adultas<br>jóvenes</div>
+<div class="age-card-range">19 — 45 años</div>
+<div class="age-card-count"><strong>5 artículos</strong> · Telemedicina, maternidad, marca personal</div>
+<div class="age-card-arrow">→</div>
+</a>
+<a href="#" class="age-card mayores" onclick="filterArticles('mayores');scrollToSection('articulos');return false">
+<div class="age-card-label">Sección 03</div>
+<div class="age-card-title">Adultas<br>mayores</div>
+<div class="age-card-range">45+ años</div>
+<div class="age-card-count"><strong>2 artículos</strong> · Menopausia, ciberseguridad en salud</div>
+<div class="age-card-arrow">→</div>
+</a>
+</div>
+</div>
+</section>
+
+<!-- ARTÍCULOS -->
+<section id="articulos" style="background:var(--cream)">
+<div class="section-inner">
+<div class="section-label">Contenido editorial</div>
+<h2 class="section-title">Artículos de este número</h2>
+<p class="section-subtitle">Información médica verificada, escrita por estudiantes de medicina de la UJMD.</p>
+<div style="display:flex;gap:0.75rem;margin:2rem 0;flex-wrap:wrap" id="filter-btns">
+<button onclick="filterArticles('todos')" class="filter-btn active" style="background:var(--magenta);color:white;border:none;padding:0.5rem 1.25rem;border-radius:50px;cursor:pointer;font-family:'DM Sans',sans-serif;font-size:0.85rem;font-weight:500">Todos</button>
+<button onclick="filterArticles('adolescentes')" class="filter-btn" style="background:var(--beige);color:var(--gray);border:none;padding:0.5rem 1.25rem;border-radius:50px;cursor:pointer;font-family:'DM Sans',sans-serif;font-size:0.85rem">Adolescentes</button>
+<button onclick="filterArticles('adultas')" class="filter-btn" style="background:var(--beige);color:var(--gray);border:none;padding:0.5rem 1.25rem;border-radius:50px;cursor:pointer;font-family:'DM Sans',sans-serif;font-size:0.85rem">Adultas</button>
+<button onclick="filterArticles('mayores')" class="filter-btn" style="background:var(--beige);color:var(--gray);border:none;padding:0.5rem 1.25rem;border-radius:50px;cursor:pointer;font-family:'DM Sans',sans-serif;font-size:0.85rem">Adultas mayores</button>
+</div>
+<div class="articles-grid" id="articles-grid">
+
+<div class="article-card" data-cat="adolescentes" onclick="openArticle(0)">
+<div class="article-card-img pink">🌸</div>
+<div class="article-card-body">
+<span class="article-tag">Adolescentes</span>
+<h3 class="article-card-title">Mi cuerpo está cambiando</h3>
+<p class="article-card-desc">Guía médica sobre cambios físicos, hormonales y psicosociales durante la pubertad femenina.</p>
+<div class="article-meta"><span class="read-time">⏱ 5 min lectura</span><span>Artículo 01</span></div>
+</div>
+</div>
+
+<div class="article-card" data-cat="adolescentes" onclick="openArticle(1)">
+<div class="article-card-img coral">🌺</div>
+<div class="article-card-body">
+<span class="article-tag">Adolescentes</span>
+<h3 class="article-card-title">Menstruación sin mitos</h3>
+<p class="article-card-desc">Lo que toda adolescente debería saber sobre su ciclo menstrual, sin tabúes ni desinformación.</p>
+<div class="article-meta"><span class="read-time">⏱ 6 min lectura</span><span>Artículo 02</span></div>
+</div>
+</div>
+
+<div class="article-card" data-cat="adolescentes" onclick="openArticle(2)">
+<div class="article-card-img purple">📱</div>
+<div class="article-card-body">
+<span class="article-tag">Adolescentes</span>
+<h3 class="article-card-title">TikTok, dietas y desinformación</h3>
+<p class="article-card-desc">Cómo identificar infoxicación y consejos virales falsos sobre peso, acné y salud femenina.</p>
+<div class="article-meta"><span class="read-time">⏱ 5 min lectura</span><span>Artículo 03</span></div>
+</div>
+</div>
+
+<div class="article-card" data-cat="adolescentes" onclick="openArticle(3)">
+<div class="article-card-img blue">🤖</div>
+<div class="article-card-body">
+<span class="article-tag">Adolescentes</span>
+<h3 class="article-card-title">Apps e IA para tu salud menstrual</h3>
+<p class="article-card-desc">Beneficios y riesgos de usar inteligencia artificial para controlar tu ciclo. ¿Ayuda o riesgo?</p>
+<div class="article-meta"><span class="read-time">⏱ 7 min lectura</span><span>Artículo 04</span></div>
+</div>
+</div>
+
+<div class="article-card" data-cat="adultas" onclick="openArticle(4)">
+<div class="article-card-img teal">💻</div>
+<div class="article-card-body">
+<span class="article-tag">Adultas</span>
+<h3 class="article-card-title">Telemedicina para mujeres ocupadas</h3>
+<p class="article-card-desc">Consultas médicas desde casa: tipos, ventajas y comunicación empática en el mundo digital.</p>
+<div class="article-meta"><span class="read-time">⏱ 6 min lectura</span><span>Artículo 05</span></div>
+</div>
+</div>
+
+<div class="article-card" data-cat="adultas" onclick="openArticle(5)">
+<div class="article-card-img pink">👩‍⚕️</div>
+<div class="article-card-body">
+<span class="article-tag">Adultas</span>
+<h3 class="article-card-title">Médicos en redes sociales</h3>
+<p class="article-card-desc">¿Cuándo confiar y cuándo dudar? Ética profesional y contenido médico responsable en lo digital.</p>
+<div class="article-meta"><span class="read-time">⏱ 5 min lectura</span><span>Artículo 06</span></div>
+</div>
+</div>
+
+<div class="article-card" data-cat="adultas" onclick="openArticle(6)">
+<div class="article-card-img coral">✨</div>
+<div class="article-card-body">
+<span class="article-tag">Adultas</span>
+<h3 class="article-card-title">Marca personal en salud</h3>
+<p class="article-card-desc">Cómo construir una imagen profesional en redes siendo médica, estudiante o profesional de salud.</p>
+<div class="article-meta"><span class="read-time">⏱ 6 min lectura</span><span>Artículo 07</span></div>
+</div>
+</div>
+
+<div class="article-card" data-cat="adultas" onclick="openArticle(7)">
+<div class="article-card-img blue">🔬</div>
+<div class="article-card-body">
+<span class="article-tag">Adultas</span>
+<h3 class="article-card-title">IA en medicina femenina</h3>
+<p class="article-card-desc">Mamografías inteligentes, ecografías, fertilidad: 4 avances que están revolucionando la salud de las mujeres.</p>
+<div class="article-meta"><span class="read-time">⏱ 8 min lectura</span><span>Artículo 08</span></div>
+</div>
+</div>
+
+<div class="article-card" data-cat="adultas" onclick="openArticle(8)">
+<div class="article-card-img green">💚</div>
+<div class="article-card-body">
+<span class="article-tag">Adultas</span>
+<h3 class="article-card-title">Maternidad y salud mental</h3>
+<p class="article-card-desc">Ansiedad, depresión posparto y agotamiento materno. Lo que pocas mujeres hablan pero todas necesitan saber.</p>
+<div class="article-meta"><span class="read-time">⏱ 9 min lectura</span><span>Artículo 09</span></div>
+</div>
+</div>
+
+<div class="article-card" data-cat="mayores" onclick="openArticle(9)">
+<div class="article-card-img teal">🌿</div>
+<div class="article-card-body">
+<span class="article-tag">Adultas mayores</span>
+<h3 class="article-card-title">Menopausia sin miedo</h3>
+<p class="article-card-desc">Cambios físicos y emocionales que sí son normales. Síntomas, tratamientos y cuándo buscar ayuda médica.</p>
+<div class="article-meta"><span class="read-time">⏱ 8 min lectura</span><span>Artículo 10</span></div>
+</div>
+</div>
+
+<div class="article-card" data-cat="mayores" onclick="openArticle(10)">
+<div class="article-card-img purple">🛡️</div>
+<div class="article-card-body">
+<span class="article-tag">Adultas mayores</span>
+<h3 class="article-card-title">Falsas curas y estafas médicas</h3>
+<p class="article-card-desc">Ciberseguridad en salud: cómo protegerse de la desinformación y los fraudes médicos en internet.</p>
+<div class="article-meta"><span class="read-time">⏱ 6 min lectura</span><span>Artículo 11</span></div>
+</div>
+</div>
+
+</div>
+</div>
+</section>
+
+<!-- QUIZ -->
+<section class="quiz-section" id="quiz">
+<div class="section-inner">
+<div class="section-label">Aprende jugando</div>
+<h2 class="section-title">¿Qué tanto sabes<br>sobre tu salud?</h2>
+<p class="section-subtitle">Un quiz rápido basado en los artículos de esta edición. ¡Sin trampa, sin miedo!</p>
+<div class="quiz-card">
+<div class="quiz-progress" id="quiz-progress"></div>
+<div id="quiz-container">
+<p class="quiz-question" id="quiz-q"></p>
+<div class="quiz-options" id="quiz-opts"></div>
+<div class="quiz-feedback" id="quiz-feedback"></div>
+<div class="quiz-nav">
+<button class="btn-primary" onclick="nextQuestion()" id="quiz-next" style="display:none">Siguiente →</button>
+</div>
+</div>
+<div class="quiz-score" id="quiz-score">
+<div class="big" id="score-num"></div>
+<p id="score-msg" style="font-size:1.1rem;color:var(--dark);font-weight:500;margin:0.5rem 0 1rem"></p>
+<p style="color:var(--gray);font-size:0.9rem;margin-bottom:1.5rem">¡Sigue explorando los artículos para aprender más sobre tu salud!</p>
+<button class="btn-primary" onclick="restartQuiz()">Intentar de nuevo</button>
+</div>
+</div>
+</div>
+</section>
+
+<!-- RASTREADOR -->
+<section class="tracker-section" id="rastreador">
+<div class="section-inner">
+<div class="section-label">Tu bienestar</div>
+<h2 class="section-title">Rastreador de ciclo<br>menstrual</h2>
+<p class="section-subtitle">Marca los días de tu ciclo para llevar un registro personal. Tu información es solo tuya.</p>
+<div class="tracker-card">
+<h3 style="font-family:'Playfair Display',serif;font-size:1.2rem;margin-bottom:0.5rem">Junio 2026</h3>
+<p style="color:var(--gray);font-size:0.85rem;margin-bottom:1.5rem">Toca los días para marcarlos</p>
+<div class="tracker-months" id="tracker-days"></div>
+<div id="tracker-info" style="background:var(--magenta-pale);border-radius:1rem;padding:1rem 1.5rem;margin-top:1rem;display:none">
+<p style="color:var(--magenta);font-weight:500;font-size:0.9rem" id="tracker-msg"></p>
+</div>
+<div class="tracker-tips">
+<div class="tracker-tip">
+<div class="icon">💧</div>
+<h4>Hidratación</h4>
+<p>Bebe 8 vasos de agua al día, especialmente durante la menstruación.</p>
+</div>
+<div class="tracker-tip">
+<div class="icon">🧘</div>
+<h4>Movimiento</h4>
+<p>El ejercicio moderado reduce los cólicos y mejora el estado de ánimo.</p>
+</div>
+<div class="tracker-tip">
+<div class="icon">📅</div>
+<h4>Registro</h4>
+<p>Un ciclo regular dura entre 21 y 35 días. Consulta si hay irregularidades.</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+
+<!-- NEWSLETTER -->
+<section class="newsletter" id="newsletter">
+<div class="section-inner" style="text-align:center">
+<div class="section-label" style="color:rgba(255,255,255,0.4)">Únete a la comunidad</div>
+<h2 class="section-title" style="color:white;margin:0 auto 1rem">Recibe contenido<br>que te cuida</h2>
+<p style="color:rgba(255,255,255,0.5);max-width:480px;margin:0 auto 2rem;line-height:1.7">Artículos nuevos, consejos de salud y recursos educativos directamente en tu correo. Sin spam, solo información que vale.</p>
+<div class="newsletter-form">
+<input type="email" placeholder="tu@correo.com" id="email-input">
+<button onclick="subscribeNewsletter()">Suscribirme</button>
+</div>
+</div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+<div class="footer-logo">MUJERES <span style="font-family:'Dancing Script',cursive;color:rgba(255,255,255,0.4);font-size:1.2rem">en salud</span></div>
+<p>Universidad José Matías Delgado · Health Magazine · Junio 2026</p>
+<p style="margin-top:0.5rem">Información basada en evidencia científica · No reemplaza la atención médica profesional</p>
+</footer>
+
+<!-- ARTICLE VIEW -->
+<div class="article-view" id="article-view">
+<button class="article-close" onclick="closeArticle()">✕</button>
+<div class="article-hero" id="article-hero">
+<div class="article-hero-bg" id="article-hero-bg"></div>
+<div class="article-hero-content">
+<span class="article-section-tag" id="article-section-tag"></span>
+<h1 class="article-hero-title" id="article-hero-title"></h1>
+<p class="article-hero-sub" id="article-hero-sub"></p>
+</div>
+</div>
+<div class="article-content">
+<div class="article-meta-bar">
+<span id="article-read-time">⏱ 5 min lectura</span>
+<span>UJMD · Junio 2026</span>
+<span>Basado en evidencia científica</span>
+</div>
+<div class="article-body" id="article-body"></div>
+<div class="article-reactions">
+<button class="reaction-btn" onclick="react(this,'💡')"><span>💡</span><span class="reaction-count" id="r0">12</span></button>
+<button class="reaction-btn" onclick="react(this,'❤️')"><span>❤️</span><span class="reaction-count" id="r1">34</span></button>
+<button class="reaction-btn" onclick="react(this,'🙌')"><span>🙌</span><span class="reaction-count" id="r2">8</span></button>
+<button class="reaction-btn" onclick="react(this,'📌')"><span>📌</span><span class="reaction-count" id="r3">21</span></button>
+</div>
+<div class="article-refs">
+<h4>Referencias bibliográficas</h4>
+<p id="article-refs-text"></p>
+</div>
+</div>
+</div>
+
+<!-- MODAL NEWSLETTER -->
+<div class="modal-overlay" id="modal-newsletter">
+<div class="modal">
+<div class="big-check">💌</div>
+<h3>¡Ya eres parte!</h3>
+<p>Te has suscrito a Mujeres en Salud. Recibirás contenido médico de calidad directamente en tu correo.</p>
+<button class="btn-primary" onclick="closeModal('modal-newsletter')" style="margin:0 auto">Perfecto</button>
+</div>
+</div>
+
+<script>
+const articles=[
+{title:"Mi cuerpo está cambiando",sub:"Guía médica sobre la adolescencia femenina",section:"Adolescentes",color:"linear-gradient(135deg,#F4C0D1,#D7265E)",time:"5 min",
+body:`<h2>¿Qué es la pubertad?</h2>
+<p>La pubertad es una de las etapas más importantes del ser humano, ya que se experimentan cambios físicos, psíquicos y sociales. Es un periodo de autodescubrimiento esencial para desarrollar las habilidades fundamentales para incorporarse a la vida adulta. La OMS y la Sociedad Americana de Salud y Medicina de la Adolescencia establecen que la adolescencia abarca aproximadamente desde los 10 hasta los 20 años. ¹</p>
+<h3>Cambios hormonales</h3>
+<p>La pubertad comienza con una disminución de la sensibilidad de las neuronas hipotalámicas productoras de GnRH, que regula la liberación de FSH y LH. Estas hormonas se liberan cada 1 a 4 horas y son las promotoras de la ovulación, además de promover la secreción de estrógeno y progesterona desde los ovarios, impactando el útero, la vagina y las mamas. ²</p>
+<p>La rapidez con la que ocurren estos cambios se ve influenciada por factores genéticos y ambientales, entre ellos la nutrición, el estado de salud, el peso y la actividad deportiva. ¹</p>
+<div class="sabias-que"><strong>¿Sabías que?</strong>El estrógeno y la progesterona no solo regulan el ciclo menstrual, también influyen en el desarrollo de las mamas, la distribución de grasa corporal y el crecimiento óseo durante la adolescencia.</div>
+<h3>Cambios físicos</h3>
+<p>El primer signo de la pubertad es el botón mamario, que aparece aproximadamente a los 11 años, seguido de vello púbico y axilar. Según los aportes de Tanner, el desarrollo mamario y el vello púbico se clasifican en cinco etapas. ³</p>
+<p>Después de dos o tres años del crecimiento de las mamas aparece la menarquia, aproximadamente entre los 11 y 15 años. Los ciclos menstruales son irregulares y pueden tardar hasta 5 años en regularse.</p>
+<h3>Cambios psicosociales</h3>
+<p>Los aportes de Piaget y Giedd explican que el cerebro adolescente todavía está en desarrollo. La corteza prefrontal, responsable de la toma de decisiones, no madura completamente hasta los 25–30 años. ¹</p>
+<ul><li>Lograr independencia familiar: las amistades toman protagonismo, aunque al final de la adolescencia se retoma la conexión familiar.</li><li>Tomar conciencia de la imagen corporal: al inicio hay inseguridad, pero progresivamente se va aceptando el cuerpo.</li><li>Establecer relaciones profundas: las amistades influyen fuertemente en la conducta y los valores.</li></ul>
+<div class="highlight-box"><p>"Conocer tu cuerpo es el primer paso para cuidarlo."</p></div>`,
+refs:"1. Casas Rivero JJ, Ceñal González-Fierro MJ. Desarrollo del adolescente. Pediatr Integral. 2005. 2. Bordini GS, Rosenfield RL. Normal pubertal development. Pediatr Rev. 2011. 3. Tanner JM. Growth at Adolescence. 1962."},
+{title:"Menstruación sin mitos",sub:"Lo que toda adolescente debería saber",section:"Adolescentes",color:"linear-gradient(135deg,#F5C4B3,#D85A30)",time:"6 min",
+body:`<h2>Rompiendo el silencio</h2>
+<p>La menstruación sigue rodeada de silencios, vergüenza y desinformación. Hablar del ciclo menstrual con información científica, clara y humana es fundamental para reconocer qué es normal, cuándo pedir ayuda médica y cómo cuidar el cuerpo sin miedo ni prejuicios.</p>
+<h3>Mitos vs. realidad</h3>
+<p><strong>Mito:</strong> "La menstruación es algo sucio."<br>La sangre menstrual está compuesta por sangre, tejido del endometrio y secreciones vaginales normales. Menstruar es simplemente una función natural del cuerpo. ⁴</p>
+<p><strong>Mito:</strong> "No puedes hacer ejercicio durante el período."<br>La actividad física moderada puede ayudar a disminuir los cólicos y mejorar el estado de ánimo gracias a la liberación de endorfinas. ⁴</p>
+<p><strong>Mito:</strong> "Usar tampón hace perder la virginidad."<br>El himen puede cambiar por múltiples razones. Los tampones son simplemente un producto de higiene menstrual. ⁴</p>
+<h3>¿Cuándo consultar al médico?</h3>
+<ul><li>El sangrado dura más de siete días</li><li>Se empapan toallas sanitarias en menos de dos horas</li><li>Aparecen coágulos muy grandes</li><li>Existe mareo intenso o desmayos</li><li>Los ciclos son extremadamente irregulares</li></ul>
+<h3>Remedios tradicionales</h3>
+<p>Las infusiones de manzanilla, canela o jengibre poseen propiedades antiinflamatorias que pueden ayudar a disminuir los cólicos leves. El calor local sobre el abdomen también ha demostrado ser útil. ⁵</p>
+<div class="sabias-que"><strong>¿Sabías que?</strong>El ciclo menstrual puede considerarse una "señal vital" de tu salud general. Tener menstruación no siempre significa que todo está bien. ⁴</div>
+<div class="highlight-box"><p>"Menstruar no debería ser motivo de silencio. Comprender tu cuerpo también es una forma de salud, autonomía y educación."</p></div>`,
+refs:"4. Mental Floss. Menstruation myths and misconceptions debunked. mentalfloss.com 5. Verywell Health. Herbs for menstrual cramps. verywellhealth.com"},
+{title:"TikTok, dietas y desinformación",sub:"Cuidado con los consejos virales",section:"Adolescentes",color:"linear-gradient(135deg,#CECBF6,#534AB7)",time:"5 min",
+body:`<h2>La infoxicación en salud</h2>
+<p>Las redes sociales han generado un conglomerado de información al alcance de toda la población, propiciando la divulgación de consejos no verificados relacionados con la salud. Esta avalancha de desinformación, conocida como <strong>infoxicación</strong>, puede afectar negativamente el bienestar físico y emocional de las adolescentes.</p>
+<h3>La presión de ser perfecta</h3>
+<p>Plataformas como Instagram y TikTok han intensificado la presión hacia las mujeres para lucir perfectas. Términos como "it girl" o "that girl" describen chicas idealizadas: calmadas, productivas, atractivas y extremadamente hermosas. Esto afecta la autoestima de millones de jóvenes. ⁶</p>
+<h3>El problema de los productos virales</h3>
+<p>Un estudio publicado en la revista Pediatrics reveló que los productos de cuidado facial populares entre niñas de 7 a 18 años contienen entre 11 y 21 ingredientes activos potencialmente irritantes que no generan ningún beneficio real a la población pediátrica. ⁷</p>
+<div class="sabias-que"><strong>¿Sabías que?</strong>Una rutina que incorpore únicamente agua, jabón y protector solar es más que suficiente para mantener la piel en condiciones óptimas. ⁶</div>
+<h3>Cómo identificar información confiable</h3>
+<p>En Perú se desarrolló la nemotecnia <strong>PRUEBA</strong>: Propósito, Responsable, Utilidad de la información, Enlaces, Búsqueda del compromiso de confidencialidad y Actualización. Iniciativas como Salud con Lupa combaten activamente la desinformación en salud. ⁸</p>
+<div class="highlight-box"><p>"Antes de seguir un consejo viral, pregúntate quién lo dice, por qué lo dice y si existe evidencia real detrás de él."</p></div>`,
+refs:"6. Fardouly J, Vartanian LR. Social media and body image concerns. 2015. 7. Yan AC, et al. Skincare overuse in children. Pediatrics. 2024. 8. Cáceres Leal S. Infoxicación y salud. 2023."},
+{title:"Apps e IA para tu salud menstrual",sub:"¿Ayuda o riesgo?",section:"Adolescentes",color:"linear-gradient(135deg,#B5D4F4,#378ADD)",time:"7 min",
+body:`<h2>La tecnología al servicio del ciclo</h2>
+<p>Hoy en día, millones de mujeres utilizan aplicaciones móviles para registrar su período, predecir la ovulación y monitorear cambios físicos y emocionales. Según Gbagbo y colaboradores, estas aplicaciones utilizan aprendizaje automático para hacer predicciones más precisas sobre menstruación, fertilidad y ovulación. ⁹</p>
+<h3>Las apps más recomendadas en 2026</h3>
+<p><strong>Flo:</strong> Permite registrar síntomas físicos y emocionales, calcular ovulación y sincronizar datos. Destaca por su gran cantidad de funciones, aunque especialistas han señalado preocupaciones sobre privacidad. ¹²</p>
+<p><strong>Clue:</strong> Reconocida por su enfoque científico y política de privacidad considerada una de las más seguras. ¹²</p>
+<p><strong>CYRA:</strong> Propuesta más reciente enfocada en seguimiento menstrual, comunidad y bienestar integral. ¹²</p>
+<h3>Los riesgos que pocas conocen</h3>
+<p>Un estudio realizado en Reino Unido encontró prácticas problemáticas en varias apps populares de salud femenina, descubriendo que algunas compartían información con terceros sin suficiente claridad. ¹⁰</p>
+<div class="sabias-que"><strong>¿Sabías que?</strong>Según especialistas consultados por PolitiFact, si una aplicación es gratuita y utiliza datos para publicidad, el usuario se convierte en el producto. ¹¹</div>
+<div class="highlight-box"><p>"La tecnología puede convertirse en una gran aliada para tu salud, siempre que tomes decisiones informadas sobre los datos que compartes."</p></div>`,
+refs:"9. Gbagbo et al. PMC11667899. 10. Euronews Salud, 2024. 11. PolitiFact, 2022. 12. CYRA. Best Period Tracking Apps 2026."},
+{title:"Telemedicina para mujeres ocupadas",sub:"Consultas médicas desde casa",section:"Adultas",color:"linear-gradient(135deg,#9FE1CB,#0F6E56)",time:"6 min",
+body:`<h2>La medicina llega a ti</h2>
+<p>La telemedicina ha revolucionado la manera en que las personas acceden a los servicios de salud. Para muchas mujeres con responsabilidades laborales, familiares y personales, las consultas médicas virtuales representan una alternativa práctica, rápida y segura, permitiendo el seguimiento del embarazo, el control de salud sexual y el manejo de enfermedades ginecológicas. ¹³</p>
+<h3>Tipos de telemedicina</h3>
+<ul><li>Teleconsulta asíncrona: comunicación diferida por texto, audio o imágenes.</li><li>Teleconsulta sincrónica: videollamada en tiempo real con el profesional de salud.</li><li>Telemonitorización: seguimiento mediante dispositivos de medición.</li><li>Teleeducación: capacitación de profesionales de la salud en línea.</li></ul>
+<h3>En El Salvador ya existe</h3>
+<p>El Centro Médico Escalón ofrece consultas en línea de medicina general, familiar y ginecología. ¹⁹ Además, DoctorSV, lanzada en noviembre de 2025 por el gobierno salvadoreño con Google Cloud y CAF, integra IA para brindar consultas virtuales, recetas digitales y expedientes médicos unificados. ²⁰</p>
+<div class="sabias-que"><strong>¿Sabías que?</strong>La OPS ha mejorado la telemedicina para la atención de mujeres embarazadas en zonas rurales de Honduras y Perú, donde alrededor de 8,400 mujeres mueren cada año por complicaciones durante el embarazo. ¹⁴</div>`,
+refs:"13. Congreso Enfermería 2024. 14. OPS/PAHO. 19. centromedicoescalon.com. 20. cssp.gob.sv DoctorSV."},
+{title:"Médicos en redes sociales",sub:"¿Cuándo confiar y cuándo dudar?",section:"Adultas",color:"linear-gradient(135deg,#F4C0D1,#D7265E)",time:"5 min",
+body:`<h2>El médico digital</h2>
+<p>Las redes sociales han cambiado la forma en que las personas buscan información sobre salud. Hoy en día, millones de usuarios consultan síntomas y tratamientos en TikTok, Instagram, YouTube y Facebook antes de visitar a un profesional. Según la Asociación Médica Americana, las redes sociales se han convertido en una de las principales fuentes de información sanitaria, aunque gran parte del contenido no pasa por procesos de verificación científica rigurosa.</p>
+<h3>Señales de un médico confiable</h3>
+<ul><li>Muestra su nombre completo, especialidad y número de licencia profesional</li><li>Basa su información en evidencia científica con fuentes verificables</li><li>Explica de forma clara los riesgos y beneficios</li><li>Motiva a consultar profesionales reales</li><li>Respeta la ética profesional y la confidencialidad</li></ul>
+<h3>Señales de alerta</h3>
+<ul><li>Promete curas milagrosas o resultados garantizados</li><li>Usa miedo o conspiraciones para captar atención</li><li>Vende productos de forma constante y agresiva</li><li>No muestra evidencia científica ni reconoce limitaciones</li></ul>
+<div class="highlight-box"><p>"Un médico confiable no promete milagros. Explica con honestidad, reconoce limitaciones y te motiva a consultar en persona."</p></div>`,
+refs:"21-24. Referencias en bibliografía completa de la revista."},
+{title:"Marca personal en salud",sub:"Mujeres profesionales en la era digital",section:"Adultas",color:"linear-gradient(135deg,#F5C4B3,#993C1D)",time:"6 min",
+body:`<h2>Tu identidad profesional importa</h2>
+<p>La marca personal en el área de la salud es la imagen y percepción que las demás personas tienen sobre un profesional, basada en la manera en que actúa, se comunica y se relaciona tanto en medios digitales como en la vida cotidiana. En el sector salud, la reputación y la confianza son aspectos esenciales.</p>
+<h3>Pasos para construirla</h3>
+<ul><li>Definir objetivos: cómo deseas ser percibida y qué mensaje quieres transmitir.</li><li>Identificar fortalezas y debilidades: reconocer tus puntos fuertes y adaptarlos al entorno.</li><li>Establecer valores personales: principios que guíen tu comportamiento profesional.</li><li>Crear una identidad visual coherente y fácil de reconocer.</li><li>Construir un ecosistema digital activo con contenido de valor. ²⁵</li></ul>
+<h3>¿Qué canales escoger?</h3>
+<p><strong>Instagram:</strong> ideal para contenido educativo visual y storytelling. <strong>TikTok:</strong> para llegar a audiencias jóvenes con videos dinámicos. <strong>LinkedIn:</strong> para fortalecer la imagen académica y profesional. <strong>YouTube:</strong> para contenido educativo profundo y comunidades de aprendizaje. ²⁶</p>
+<div class="sabias-que"><strong>Evita estos errores:</strong>No tener un nicho definido, ignorar los comentarios en línea, falta de autenticidad y descuidar la privacidad de tus pacientes. ²⁷ ²⁸</div>`,
+refs:"25. marketingnumerouno.com. 26. comsalud.es. 27-28. iesrp.edu.pe."},
+{title:"IA en medicina femenina",sub:"4 avances que están cambiando la salud de las mujeres",section:"Adultas",color:"linear-gradient(135deg,#B5D4F4,#185FA5)",time:"8 min",
+body:`<h2>La inteligencia artificial cuida tu salud</h2>
+<p>La inteligencia artificial ya no es exclusiva de laboratorios. En medicina, su impacto transforma áreas clave de la salud femenina, desde la detección temprana del cáncer de mama hasta el monitoreo del embarazo y los tratamientos de fertilidad.</p>
+<h3>1. IA y cáncer de mama</h3>
+<p>Los sistemas de IA entrenados con millones de imágenes médicas pueden reconocer señales extremadamente sutiles. Un estudio en Suecia con más de 80 mil mujeres encontró que las mamografías analizadas con IA detectaron un 20% más de casos de cáncer en comparación con la evaluación tradicional. ²⁹</p>
+<h3>2. Ecografías inteligentes para embarazos de riesgo</h3>
+<p>Los ecógrafos portátiles asistidos por IA usan algoritmos capaces de interpretar imágenes ecográficas y detectar complicaciones en el embarazo. Son especialmente útiles en países de ingresos bajos donde el acceso a especialistas es limitado. ³⁰</p>
+<h3>3. IA y fertilidad</h3>
+<p>Mediante algoritmos de aprendizaje automático, los sistemas pueden analizar características de óvulos, espermatozoides y embriones para identificar cuáles tienen mayores probabilidades de lograr un embarazo exitoso. Algunos modelos han alcanzado niveles de precisión superiores al 90%. ³¹</p>
+<h3>4. MenstruAI: la toalla sanitaria inteligente</h3>
+<p>Creada en el ETH Zurich, MenstruAI puede detectar posibles infecciones, desequilibrios hormonales y enfermedades como endometriosis mediante el análisis de la sangre menstrual. Su costo estimado es de un dólar por unidad. ³²</p>
+<div class="sabias-que"><strong>¿Sabías que?</strong>La sangre menstrual contiene más de 600 proteínas y biomarcadores que pueden aportar información importante sobre la salud hormonal, inmunológica y reproductiva. ³²</div>`,
+refs:"29. breastcancer.org. 30. gatesfoundation.org. 31. PMC6733338. 32. agencia.unq.edu.ar."},
+{title:"Maternidad y salud mental",sub:"Lo que pocas mujeres hablan",section:"Adultas",color:"linear-gradient(135deg,#C0DD97,#3B6D11)",time:"9 min",
+body:`<h2>Lo que nadie te contó sobre ser mamá</h2>
+<p>Nadie habla de las noches en que no puedes dormir aunque el bebé esté dormido, de la angustia que no tiene nombre, o del cansancio que va más allá de lo físico. La OMS estima que aproximadamente el 10% de las mujeres embarazadas y el 13% de las que han dado a luz recientemente desarrollarán algún trastorno de salud mental. ³³</p>
+<h3>Depresión posparto vs. baby blues</h3>
+<p>Los baby blues son normales y suelen resolverse en dos semanas. La depresión posparto es diferente: más profunda, más duradera y necesita atención médica. Un estudio de 2024 en la revista Diagnostics la describe como una condición incapacitante con prevalencia en aumento. No es debilidad. Es una enfermedad. ³⁴</p>
+<h3>Síntomas de alerta</h3>
+<ul><li>Tristeza profunda o llanto frecuente sin motivo claro</li><li>Sensación de estar desconectada del bebé</li><li>Irritabilidad o rabia desproporcionada</li><li>Dificultad para dormir aunque el bebé duerma</li><li>Pensamientos de hacerse daño a sí misma</li></ul>
+<h3>La ansiedad posparto</h3>
+<p>Un estudio en Francia en 2024 encontró que el 27.6% de las mujeres presentaban síntomas de ansiedad dos meses después del parto, incluso aquellas sin antecedentes de salud mental. ³⁵</p>
+<h3>El tratamiento existe y funciona</h3>
+<p>La terapia cognitivo-conductual y los antidepresivos ISRS ofrecen las mejores evidencias de éxito. El apoyo del entorno, los grupos de madres y la participación activa de la pareja también marcan una diferencia enorme. ³⁴ ³⁷</p>
+<div class="highlight-box"><p>"Sentirse desbordada no te hace menos madre. Llorar no te hace débil. Pedir ayuda te hace valiente."</p></div>`,
+refs:"33. Lancet eClinicalMedicine 2024. 34. Diagnostics 2024. 35. Eur Psychiatry 2024. 37. J Community Appl Soc Psychol 2024."},
+{title:"Menopausia sin miedo",sub:"Cambios físicos y emocionales que sí son normales",section:"Adultas mayores",color:"linear-gradient(135deg,#9FE1CB,#085041)",time:"8 min",
+body:`<h2>Un nuevo capítulo, no el último</h2>
+<p>La menopausia no es una enfermedad. Es una etapa completamente natural de la vida de toda mujer que se diagnostica cuando han pasado 12 meses consecutivos sin menstruación. La OMS indica que la mayoría de las mujeres la experimentan entre los 45 y los 55 años. ⁴⁴</p>
+<h3>Los sofocos: el síntoma más famoso</h3>
+<p>Los sofocos consisten en una sensación súbita de calor intenso desde el pecho hasta el cuello y la cara. Pueden desencadenarse por alcohol, bebidas calientes, alimentos picantes, estrés emocional, cafeína y ambientes cálidos. ⁴⁶ ⁴⁷</p>
+<h3>Cambios emocionales reales</h3>
+<p>El estrógeno tiene efectos directos sobre la corteza prefrontal, el hipocampo y la amígdala. Cuando sus niveles caen, puede haber ansiedad, irritabilidad, cambios de humor bruscos y dificultad para concentrarse —el llamado "brain fog". ⁴⁸</p>
+<h3>Mitos que hay que dejar ir</h3>
+<ul><li>"La menopausia es el fin de tu vida sexual" — Falso. Muchas mujeres reportan mayor libertad e intimidad. ⁴⁴</li><li>"Si tomas hormonas te dará cáncer" — La evidencia actual muestra que la terapia hormonal es segura cuando se inicia antes de los 60 años sin contraindicaciones. ⁵⁴</li><li>"Solo afecta a mujeres mayores" — La perimenopausia puede comenzar a los 40 años. ⁴⁴</li></ul>
+<h3>Opciones de tratamiento</h3>
+<p>La terapia hormonal, la terapia cognitivo-conductual, el ejercicio físico regular y una dieta rica en calcio y vitamina D son las herramientas más efectivas. ⁵² ⁵⁴ ⁵⁵</p>
+<div class="highlight-box"><p>"La menopausia no es el fin de nada. Es el comienzo de una nueva relación con tu cuerpo, que merece ser comprendida, cuidada y respetada."</p></div>`,
+refs:"44. OMS Menopause 2024. 46. BMJ Sex Reprod Health 2024. 48. Indian J Psychiatry 2025. 52. Korean Society of Menopause 2024. 54. Healthline 2025."},
+{title:"Falsas curas y estafas médicas en internet",sub:"Cómo protegerse",section:"Adultas mayores",color:"linear-gradient(135deg,#CECBF6,#3C3489)",time:"6 min",
+body:`<h2>No todo lo que brilla en internet es salud</h2>
+<p>El crecimiento de internet y las redes sociales ha facilitado el acceso rápido a información sobre salud. Sin embargo, también ha aumentado la circulación de falsas curas, productos milagrosos y estafas médicas que ponen en riesgo la salud y la economía, especialmente de los adultos mayores.</p>
+<h3>¿Cómo reconocer una falsa cura?</h3>
+<ul><li>Promete ser una "cura milagrosa" o "tratamiento secreto"</li><li>Usa frases como "los médicos no quieren que lo sepas"</li><li>No tiene evidencia científica ni ha sido aprobada por autoridades sanitarias</li><li>Genera urgencia: "última oportunidad", "oferta limitada"</li></ul>
+<h3>La ciberseguridad en salud</h3>
+<p>La ciberseguridad consiste en proteger información digital y evitar fraudes en línea. En temas de salud, incluye proteger datos médicos, evitar robo de identidad, detectar páginas falsas y no compartir información sensible. La OMS advirtió que la desinformación médica puede propagarse más rápido que la información correcta, especialmente en redes sociales. ⁵⁶ ⁵⁷</p>
+<h3>Consejos de protección digital</h3>
+<ul><li>Utilizar contraseñas seguras y únicas para cada cuenta</li><li>No abrir enlaces sospechosos aunque parezcan urgentes</li><li>Consultar siempre con un médico real antes de iniciar tratamientos vistos en internet</li><li>Verificar las credenciales del profesional antes de seguir su consejo</li><li>Hablar con familiares de confianza ante dudas digitales</li></ul>
+<div class="sabias-que"><strong>Recuerda:</strong>La FDA y la OMS advierten constantemente sobre el peligro de abandonar tratamientos médicos comprobados para seguir remedios sin evidencia. ⁵⁷</div>`,
+refs:"56. mayoclinic.org 57. fda.gov 58-62. Referencias completas en bibliografía de la revista."}
+];
+
+const quizData=[
+{q:"¿Cuándo aparece el primer signo físico de la pubertad femenina?",opts:["Aparición de vello axilar","El botón mamario alrededor de los 11 años","La menarquia","Cambios de humor"],ans:1,fb:"Correcto. El botón mamario es el primer signo de la pubertad, regulado por la secreción de estrógeno. Aparece aproximadamente a los 11 años. ¹"},
+{q:"¿Cuál de estas afirmaciones sobre la menstruación es CORRECTA?",opts:["No se puede hacer ejercicio durante el período","El tampón puede hacer perder la virginidad","El ejercicio moderado puede reducir los cólicos","Tener menstruación siempre significa que todo está bien"],ans:2,fb:"Correcto. La actividad física moderada libera endorfinas que ayudan a reducir los cólicos y mejorar el estado de ánimo. ⁴"},
+{q:"¿Qué es la 'infoxicación'?",opts:["Un tipo de infección hormonal","La sobrecarga de información no verificada","Una enfermedad relacionada con el acné","Un medicamento viral"],ans:1,fb:"Exacto. La infoxicación es la avalancha de información no verificada en redes sociales que puede afectar negativamente la salud, especialmente en adolescentes. ⁶"},
+{q:"¿Cuándo se diagnostica oficialmente la menopausia?",opts:["Cuando aparecen los primeros sofocos","Cuando los ciclos se vuelven irregulares","Después de 12 meses consecutivos sin menstruación","A los 50 años exactamente"],ans:2,fb:"Correcto según la OMS. La menopausia se diagnostica cuando han pasado 12 meses consecutivos sin menstruación. La mayoría de las mujeres la experimentan entre los 45 y 55 años. ⁴⁴"},
+{q:"¿Qué porcentaje de mujeres que han dado a luz recientemente puede desarrollar algún trastorno de salud mental?",opts:["5%","8%","13%","25%"],ans:2,fb:"La OMS estima que aproximadamente el 13% de las mujeres que han dado a luz recientemente desarrollarán algún trastorno de salud mental. Los números reales podrían ser mayores. ³³"}
+];
+
+let currentQ=0,score=0,answered=false;
+let markedDays=new Set();
+
+function initQuiz(){
+currentQ=0;score=0;answered=false;
+buildProgress();
+showQuestion();
+}
+
+function buildProgress(){
+const p=document.getElementById('quiz-progress');
+p.innerHTML='';
+quizData.forEach((_,i)=>{
+const d=document.createElement('div');
+d.className='quiz-dot'+(i===0?' active':'');
+d.id='dot-'+i;
+p.appendChild(d);
+});
+}
+
+function showQuestion(){
+const data=quizData[currentQ];
+document.getElementById('quiz-q').textContent=data.q;
+const opts=document.getElementById('quiz-opts');
+opts.innerHTML='';
+data.opts.forEach((o,i)=>{
+const btn=document.createElement('button');
+btn.className='quiz-option';
+btn.textContent=o;
+btn.onclick=()=>selectOption(i);
+opts.appendChild(btn);
+});
+document.getElementById('quiz-feedback').className='quiz-feedback';
+document.getElementById('quiz-feedback').textContent='';
+document.getElementById('quiz-next').style.display='none';
+answered=false;
+}
+
+function selectOption(idx){
+if(answered)return;
+answered=true;
+const data=quizData[currentQ];
+const btns=document.querySelectorAll('.quiz-option');
+btns.forEach((b,i)=>{
+if(i===data.ans)b.classList.add('correct');
+else if(i===idx&&idx!==data.ans)b.classList.add('wrong');
+});
+const fb=document.getElementById('quiz-feedback');
+fb.textContent=data.fb;
+fb.className='quiz-feedback show '+(idx===data.ans?'correct-fb':'wrong-fb');
+if(idx===data.ans)score++;
+document.getElementById('quiz-next').style.display='inline-flex';
+}
+
+function nextQuestion(){
+currentQ++;
+if(currentQ>=quizData.length){showScore();return;}
+document.getElementById('dot-'+(currentQ-1)).classList.remove('active');
+document.getElementById('dot-'+currentQ).classList.add('active');
+showQuestion();
+}
+
+function showScore(){
+document.getElementById('quiz-container').style.display='none';
+const sc=document.getElementById('quiz-score');
+sc.classList.add('show');
+document.getElementById('score-num').textContent=score+'/'+quizData.length;
+const msgs=["Sigue leyendo los artículos, ¡hay mucho por aprender!","¡Buen comienzo! Explora más para mejorar.","¡Muy bien! Tienes buena base de conocimiento.","¡Excelente! Eres toda una experta en salud femenina.","¡Perfecta! Dominas los temas de esta edición."];
+document.getElementById('score-msg').textContent=msgs[score]||msgs[4];
+}
+
+function restartQuiz(){
+document.getElementById('quiz-container').style.display='block';
+document.getElementById('quiz-score').className='quiz-score';
+initQuiz();
+}
+
+function openArticle(idx){
+const a=articles[idx];
+document.getElementById('article-hero-title').textContent=a.title;
+document.getElementById('article-hero-sub').textContent=a.sub;
+document.getElementById('article-section-tag').textContent=a.section;
+document.getElementById('article-hero-bg').style.background=a.color;
+document.getElementById('article-read-time').textContent='⏱ '+a.time+' lectura';
+document.getElementById('article-body').innerHTML=a.body;
+document.getElementById('article-refs-text').textContent=a.refs;
+const reactions=[12,34,8,21];
+reactions.forEach((v,i)=>document.getElementById('r'+i).textContent=v);
+document.querySelectorAll('.reaction-btn').forEach(b=>b.classList.remove('active'));
+const view=document.getElementById('article-view');
+view.classList.add('open');
+view.scrollTop=0;
+document.body.style.overflow='hidden';
+}
+
+function closeArticle(){
+document.getElementById('article-view').classList.remove('open');
+document.body.style.overflow='';
+}
+
+function react(btn,emoji){
+const isActive=btn.classList.contains('active');
+const countEl=btn.querySelector('.reaction-count');
+let n=parseInt(countEl.textContent);
+if(isActive){btn.classList.remove('active');countEl.textContent=n-1;}
+else{btn.classList.add('active');countEl.textContent=n+1;}
+}
+
+function filterArticles(cat){
+const cards=document.querySelectorAll('.article-card');
+cards.forEach(c=>{
+if(cat==='todos'||c.dataset.cat===cat){c.style.display='block';}
+else{c.style.display='none';}
+});
+document.querySelectorAll('.filter-btn').forEach(b=>{
+b.style.background=b.textContent.toLowerCase().replace(' ','')===cat||
+(cat==='todos'&&b.textContent==='Todos')?'var(--magenta)':'var(--beige)';
+b.style.color=b.textContent.toLowerCase().replace(' ','')===cat||
+(cat==='todos'&&b.textContent==='Todos')?'white':'var(--gray)';
+});
+}
+
+function scrollToSection(id){
+document.getElementById(id).scrollIntoView({behavior:'smooth'});
+}
+
+function showHome(){
+window.scrollTo({top:0,behavior:'smooth'});
+}
+
+function subscribeNewsletter(){
+const email=document.getElementById('email-input').value;
+if(!email||!email.includes('@')){
+document.getElementById('email-input').style.borderColor='#D85A30';
+return;
+}
+document.getElementById('email-input').style.borderColor='';
+document.getElementById('modal-newsletter').classList.add('open');
+document.getElementById('email-input').value='';
+}
+
+function closeModal(id){
+document.getElementById(id).classList.remove('open');
+}
+
+function toggleMenu(){
+const links=document.querySelector('.nav-links');
+links.style.display=links.style.display==='flex'?'none':'flex';
+links.style.flexDirection='column';
+links.style.position='absolute';
+links.style.top='64px';
+links.style.left='0';
+links.style.right='0';
+links.style.background='white';
+links.style.padding='1rem 2rem';
+links.style.borderBottom='1px solid var(--gray-light)';
+}
+
+function initTracker(){
+const container=document.getElementById('tracker-days');
+const days=['L','M','M','J','V','S','D'];
+for(let i=1;i<=30;i++){
+const btn=document.createElement('button');
+btn.className='tracker-month'+(i===29?' today':'');
+btn.textContent=i;
+btn.onclick=()=>toggleDay(btn,i);
+container.appendChild(btn);
+}
+}
+
+function toggleDay(btn,day){
+if(markedDays.has(day)){markedDays.delete(day);btn.classList.remove('marked');}
+else{markedDays.add(day);btn.classList.add('marked');}
+updateTrackerInfo();
+}
+
+function updateTrackerInfo(){
+const info=document.getElementById('tracker-info');
+const msg=document.getElementById('tracker-msg');
+if(markedDays.size===0){info.style.display='none';return;}
+info.style.display='block';
+const sorted=[...markedDays].sort((a,b)=>a-b);
+if(markedDays.size===1){msg.textContent='Día '+sorted[0]+' marcado. ¡Sigue registrando para llevar un seguimiento más preciso!';}
+else{msg.textContent='Tienes '+markedDays.size+' días marcados ('+sorted.join(', ')+'). Recuerda que un ciclo regular dura entre 21 y 35 días.';}
+}
+
+initQuiz();
+initTracker();
+</script>
+</body>
+</html>
